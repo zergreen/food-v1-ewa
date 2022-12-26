@@ -1,9 +1,9 @@
 # learn2gether
 คำสั่งรัน
 ----------
-1. yarn
-2. yarn run green
-3. yarn run dev หรือ yarn run testing
+1. yarn # ติดตั้ง module
+2. yarn run green # เปิด server backend [เทียม]
+3. yarn run dev หรือ yarn run testing # เปิด server frontend [หลัก]
 
 # demo
 หน้าหลัก
