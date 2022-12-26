@@ -1,0 +1,17 @@
+{
+  "name": "foodEditEwa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "testing": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "green": "json-server --watch db.json"
+  },
+  "dependencies": {
+    "json-server": "^0.17.0",
+    "nuxt": "^2.15.8",
+    "@nuxtjs/axios": "^5.13.6"
+  }
+}

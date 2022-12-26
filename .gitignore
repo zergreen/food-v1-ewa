@@ -1,0 +1,7 @@
+# green config
+yarn.lock
+package-log.json
+
+node_modules/
+
+.nuxt/
