@@ -1,6 +1,20 @@
 <template>
   <!-- component -->
   <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+    <div>
+      custom ID fill
+      <div class="md:col-span-5">
+        <label for="custom-id">ID</label>
+        <input
+          type="text"
+          name="custom-id"
+          id="custom-id"
+          class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+          @input="update"
+          v-model="custom_id"
+        />
+      </div>
+    </div>
     <div class="container max-w-screen-lg mx-auto">
       <div>
         <h2 class="font-semibold text-xl text-gray-600">แก้ไขเมนูอาหาร</h2>
@@ -90,6 +104,23 @@
                     >
                       UPDATE
                     </button>
+                    <button
+                      @click="deleteModal"
+                      class="bg-green-600 m-2 hover:bg-blue-500 text-white py-1 px-3 rounded-full"
+                    >
+                      DELETE
+                    </button>
+                    <!-- <button
+                      class="bg-green-600 m-2 hover:bg-blue-500 text-white py-1 px-3 rounded-full"
+                    >
+                      <a href="/create-food">CREATE</a>
+                    </button> -->
+                    <button
+                      onclick="location.href='/create-food'"
+                      type="button"
+                    >
+                      CREATE
+                    </button>
                   </div>
                 </div>
               </div>
@@ -102,7 +133,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   props: {
@@ -111,12 +143,19 @@ export default {
   data() {
     return {
       food: {},
-    }
+      custom_id: null,
+    };
   },
   mounted() {
-    this.getFoodById()
+    // this.getFoodById()
+    // this.update()
   },
   methods: {
+    update() {
+      this.foodId = this.custom_id;
+      this.getFoodById();
+      this.$forceUpdate();
+    },
     // triggerClose() {
     //   this.$emit('closeEditModal')
     // },
@@ -124,28 +163,61 @@ export default {
       axios
         .get(`http://localhost:3000/foods/${this.foodId}`)
         .then((response) => {
-          this.food = response.data
+          this.food = response.data;
         })
         .catch((error) => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     updatefood() {
       axios
-        .put(
-          `http://localhost:3000/foods/${this.foodId}`,
-          this.food
-        )
+        .put(`http://localhost:3000/foods/${this.foodId}`, this.food)
         .then((response) => {
-          console.log(response.data)
-        //   this.$emit('closeEditModal')
-        //   this.$emit('reloadDataTable')
-        //   this.$emit('showSuccessAlert')
+          console.log(response.data);
+          //   this.$emit('closeEditModal')
+          //   this.$emit('reloadDataTable')
+          //   this.$emit('showSuccessAlert')
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
+        });
+    },
+    removeFoodFromData() {
+      axios
+        .delete(`http://localhost:3000/foods/${this.foodId}`)
+        .then((response) => {
+          console.log("after call delte api");
+          console.log(response);
+          //   this.$emit('reloadDataTable')
+          //   this.$emit('showDeleteAlert')
+          //   this.$emit('closeDeleteModal')
         })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteModal() {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success").then(
+            (result) => {
+              this.removeFoodFromData();
+              if (result.isConfirmed) {
+                location.reload();
+              }
+            }
+          );
+        }
+      });
     },
   },
-}
+};
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-   <i> Food Component</i>
+   <i> test</i>
     <CreateFood :foodId="this.id" />
   </div>
 </template>
@@ -8,11 +8,6 @@
 <script>
 import CreateFood from '@/components/food-models/CreateFood.vue'
 export default {
-  data() {
-    return {
-       id: 1,
-    }
-  },
   components: { CreateFood },
 }
 </script>

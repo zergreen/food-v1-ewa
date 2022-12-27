@@ -11,18 +11,25 @@
       "id": 1
     },
     {
-      "menu_picture": "tarst",
-      "menu_name": "tarst",
-      "price": "tarst",
-      "detail": "tarst",
-      "id": 2
-    },
-    {
       "menu_picture": "hello.img",
       "menu_name": "ก๋วยเตี๋ยว",
       "price": "30",
       "detail": "อร่อยดีนะ",
+      "id": 2
+    },
+    {
+      "menu_picture": "food-1.img",
+      "menu_name": "steak",
+      "price": "100",
+      "detail": "staeck detail 01",
       "id": 3
+    },
+    {
+      "menu_picture": "food-1.img",
+      "menu_name": "shabu",
+      "price": "1000",
+      "detail": "staeck detail 03",
+      "id": 4
     }
   ]
 }
