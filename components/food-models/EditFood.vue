@@ -137,13 +137,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  props: {
-    foodId: Number,
-  },
   data() {
     return {
       food: {},
       custom_id: null,
+      foodId: null,
     };
   },
   mounted() {
