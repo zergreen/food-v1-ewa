@@ -2,7 +2,7 @@
   "foods": [
     {
       "menu_id": "MENU01",
-      "menu_name": "แกงกระหรี่ หมูทอด",
+      "menu_name": "แกงกระหรี่ sphesice",
       "price": 40,
       "detail": "แกงกระหรี่เข้มข้น หมูทอดชิ้นใหญ่ๆ กรอบนอกนุ่มใน",
       "score": 5,
@@ -23,13 +23,6 @@
       "price": "100",
       "detail": "staeck detail 01",
       "id": 3
-    },
-    {
-      "menu_picture": "food-1.img",
-      "menu_name": "shabu",
-      "price": "1000",
-      "detail": "staeck detail 03",
-      "id": 4
     }
   ]
 }
