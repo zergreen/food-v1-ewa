@@ -1,18 +1,18 @@
 <template>
   <div>
    <i> Food Component</i>
-    <EditFood :foodId="this.id" />
+    <EditFoodV2 :foodId="this.id" />
   </div>
 </template>
 
 <script>
-import EditFood from '@/components/food-models/EditFood.vue'
+import EditFoodV2 from '@/components/food-models/EditFoodV2.vue'
 export default {
   data() {
     return {
        id: 1,
     }
   },
-  components: { EditFood },
+  components: { EditFoodV2 },
 }
 </script>
