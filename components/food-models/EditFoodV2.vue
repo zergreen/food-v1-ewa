@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div>
+        <!-- div นี้ :สำหรับการเทสเท่านั้น -->
       <!-- Value: '{{this.models}}' -->
       <div class="input-group flex-nowrap">
         <!-- <span class="input-group-text" id="addon-wrapping">@</span> -->
@@ -88,7 +89,7 @@ export default {
   },
   methods: {
     updateId(value) {
-      console.log("helloworld");
+      console.log("updateId : method");
       this.id = value;
     },
     getData() {

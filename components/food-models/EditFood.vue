@@ -2,6 +2,9 @@
   <!-- component -->
   <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
     <div>
+      <pre>
+        {{ this.models }}
+      </pre>
       custom ID fill
       <div class="md:col-span-5">
         <label for="custom-id">ID</label>
@@ -11,10 +14,25 @@
           id="custom-id"
           class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
           @input="update"
+          @keyup.enter="update"
+          @change="update"
           v-model="custom_id"
+          :disabled="disabled == 1"
         />
       </div>
+      <div>
+        <button @click="disabled = (disabled + 1) % 2">Admin</button>
+        <input type="text" :disabled="disabled == 1" />
+      </div>
+      <div>
+        <input @click="myCheck" type="checkbox" />
+        <label> ถ้าจะ create ติ๊กที่ปุ่มนี้</label>
+      </div>
+      <div>
+        <img :src="food.menu_picture" />
+      </div>
     </div>
+
     <div class="container max-w-screen-lg mx-auto">
       <div>
         <h2 class="font-semibold text-xl text-gray-600">แก้ไขเมนูอาหาร</h2>
@@ -99,7 +117,7 @@
                 <div class="md:col-span-5 text-right">
                   <div class="inline-flex items-end">
                     <button
-                      @click="updatefood"
+                      @click="updateModal"
                       class="bg-green-600 m-2 hover:bg-blue-500 text-white py-1 px-3 rounded-full"
                     >
                       UPDATE
@@ -115,12 +133,7 @@
                     >
                       <a href="/create-food">CREATE</a>
                     </button> -->
-                    <button
-                      onclick="location.href='/create-food'"
-                      type="button"
-                    >
-                      CREATE
-                    </button>
+                    <button @click="createModal" type="button">CREATE</button>
                   </div>
                 </div>
               </div>
@@ -129,27 +142,102 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <!-- <EditFoodV2 /> -->
+
+      <p>list รายชื่อ เมนูทั้งหมด</p>
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>menu_name</th>
+            <!-- <th>Year</th> -->
+          </tr>
+        </thead>
+        <tbody v-for="(model, index) in models" :key="index">
+          <tr @click="updateId(model.id)">
+            <i @click="updateId(model.id)" class="bi bi-arrow-up"></i
+            >{{
+              model.id
+            }}
+            <td>{{ model.menu_name }}</td>
+            <!-- <td>1961</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import EditFoodV2 from "@/components/food-models/EditFoodV2";
 
 export default {
+  components: { EditFoodV2 },
   data() {
     return {
       food: {},
       custom_id: null,
       foodId: null,
+
+      id: null,
+      admin: false,
+      disabled: 1,
+
+      models: {},
+
+      // models: [
+      //   {
+      //     id: 1,
+      //     menu_name: "Green",
+      //     detail: "Goblan",
+      //   },
+      //   {
+      //     id: 2,
+      //     menu_name: "Luffy",
+      //     detail: "Monkey",
+      //   },
+      //   {
+      //     id: 3,
+      //     menu_name: "G",
+      //     detail: "Dragon",
+      //   },
+      // ],
     };
   },
   mounted() {
     // this.getFoodById()
     // this.update()
+
+    this.getData();
   },
   methods: {
+    myCheck() {
+      this.disabled = (this.disabled + 1) % 2;
+    },
+    updateId(value) {
+      console.log("updateId : method");
+      this.custom_id = value;
+
+      //update form
+      this.update();
+    },
+    getData() {
+      axios
+        .get("http://localhost:3000/foods/")
+        .then((res) => {
+          console.log(res);
+          this.models = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     update() {
+      console.log("helloworld");
       this.foodId = this.custom_id;
       this.getFoodById();
       this.$forceUpdate();
@@ -210,12 +298,82 @@ export default {
               this.removeFoodFromData();
               if (result.isConfirmed) {
                 location.reload();
+                // this.$forceUpdate
               }
             }
           );
         }
       });
     },
+    createModal() {
+      Swal.fire({
+        title: "Are you sure to creat?",
+        text: "ไม่สามารถย้อนกลับได้แล้วนะ!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, create it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Created!", "Your Data has been Created.", "success").then(
+            (result) => {
+              this.addNewMenu();
+              if (result.isConfirmed) {
+                location.reload();
+                // this.$forceUpdate
+              }
+            }
+          );
+        }
+      });
+    },
+    updateModal() {
+      Swal.fire({
+        title: "Are you sure to edit?",
+        text: "ไม่สามารถย้อนกลับได้แล้วนะ!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Edit it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Edited!", "Your Data has been edited.", "success").then(
+            (result) => {
+              this.updatefood();
+              if (result.isConfirmed) {
+                location.reload();
+                // this.$forceUpdate()
+              }
+            }
+          );
+        }
+      });
+    },
+    addNewMenu() {
+      console.log("before value");
+      console.log(this.food);
+      console.log("--------------");
+      axios
+        .post("http://localhost:3000/foods/", this.food)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
+
+<style scoped>
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+slideshow.img {
+  height: 100px;
+  width: auto; /*maintain aspect ratio*/
+  max-width: 200px;
+}
+</style>

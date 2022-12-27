@@ -11,18 +11,25 @@
       "id": 1
     },
     {
-      "menu_picture": "hello.img",
+      "menu_picture": "https://i0.wp.com/goodlifeupdate.com/app/uploads/2021/04/image-132-edited-1.png",
       "menu_name": "ก๋วยเตี๋ยว",
       "price": "30",
       "detail": "อร่อยดีนะ",
       "id": 2
     },
     {
-      "menu_picture": "food-1.img",
+      "menu_picture": "https://www.shutterstock.com/image-photo/cooked-meat-small-tomatoes-roasted-260nw-476021737.jpg",
       "menu_name": "steak",
       "price": "100",
       "detail": "staeck detail 01",
       "id": 3
+    },
+    {
+      "menu_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Som_tam_pu.jpg/250px-Som_tam_pu.jpg",
+      "menu_name": "ส้มตำ",
+      "price": "33",
+      "detail": "8754",
+      "id": 4
     }
   ]
 }
