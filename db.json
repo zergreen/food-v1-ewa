@@ -3,7 +3,7 @@
     {
       "menu_id": "MENU01",
       "menu_name": "แกงกระหรี่ sphesice",
-      "price": 40,
+      "price": "45",
       "detail": "แกงกระหรี่เข้มข้น หมูทอดชิ้นใหญ่ๆ กรอบนอกนุ่มใน",
       "score": 5,
       "menu_picture": "https://ik.imagekit.io/seproject/se/001.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1670950969146",
@@ -26,7 +26,7 @@
     },
     {
       "menu_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Som_tam_pu.jpg/250px-Som_tam_pu.jpg",
-      "menu_name": "ส้มตำ",
+      "menu_name": "somtum",
       "price": "33",
       "detail": "8754",
       "id": 4

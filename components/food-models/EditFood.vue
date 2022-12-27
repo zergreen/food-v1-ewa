@@ -2,9 +2,6 @@
   <!-- component -->
   <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
     <div>
-      <pre>
-        {{ this.models }}
-      </pre>
       custom ID fill
       <div class="md:col-span-5">
         <label for="custom-id">ID</label>
@@ -117,7 +114,7 @@
                 <div class="md:col-span-5 text-right">
                   <div class="inline-flex items-end">
                     <button
-                      @click="updateModal"
+                      @click="updatefood"
                       class="bg-green-600 m-2 hover:bg-blue-500 text-white py-1 px-3 rounded-full"
                     >
                       UPDATE
@@ -167,6 +164,10 @@
         </tbody>
       </table>
     </div>
+    <pre>
+        {{ this.models }}
+      </pre
+    >
   </div>
 </template>
 
@@ -260,6 +261,7 @@ export default {
         .put(`http://localhost:3000/foods/${this.foodId}`, this.food)
         .then((response) => {
           console.log(response.data);
+
           //   this.$emit('closeEditModal')
           //   this.$emit('reloadDataTable')
           //   this.$emit('showSuccessAlert')
@@ -267,6 +269,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      location.reload();
     },
     removeFoodFromData() {
       axios
