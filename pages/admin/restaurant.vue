@@ -19,6 +19,19 @@
       >
         <a href="/admin/deleterestaurant"> Delete - </a>
       </button>
+      
+      <button
+        class="bg-red-800 m-2 hover:bg-red-900 text-white py-1 px-3 rounded"
+      >
+        <nuxt-link to="/admin/edit/EditMenu"> <i class="bi bi-pencil-square"/>MENU</nuxt-link>
+      </button>
+
+      <button
+        class="bg-red-800 m-2 hover:bg-red-900 text-white py-1 px-3 rounded"
+      >
+        <nuxt-link to="/admin/edit/CreateMenu"> <i class="bi bi-plus-square"/>MENU </nuxt-link>
+      </button>
+      
       <div
         class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
       >
@@ -88,3 +101,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+</style>
